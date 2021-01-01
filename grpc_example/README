@@ -1,0 +1,87 @@
+what is grpc ? 
+-------------
+gRPC is a powerful framework for working with Remote Procedure Calls.  
+
+RPCs allow you to write code as though it will be run on a local computer, even though it may be executed on another computer. 
+
+follow below to install cmake and grpc. 
+
+https://grpc.io/docs/languages/cpp/quickstart/ 
+
+
+How to build sample apps (grpc/examples/cpp/helloworld) ? 
+--------------------------------------------------------
+export "MY_INSTALL_DIR" (this is the directory where i have installed grpc and cmake) and "PATH" variables (this is the path where cmake binary is searched for) 
+
+$ export MY_INSTALL_DIR=/home/divakar/grpc/grpc-a 
+
+$ export PATH="$PATH:$MY_INSTALL_DIR/bin" 
+
+$ echo $PATH 
+
+/home/divakar/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/divakar/grpc/grpc-a/bin 
+
+$ echo $MY_INSTALL_DIR 
+
+/home/divakar/grpc/grpc-a 
+
+Change to the example’s directory: 
+
+$ cd examples/cpp/helloworld 
+
+Build the example using cmake: 
+
+$ mkdir -p cmake/build 
+
+$ pushd cmake/build 
+
+$ cmake -DCMAKE_PREFIX_PATH=$MY_INSTALL_DIR ../.. 
+
+(you can pass "cmake -DCMAKE_PREFIX_PATH=$MY_INSTALL_DIR -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ../.." to enable make output to stduot , also it creates compile_commands.json which will have make commands in it) 
+
+$ make 
+
+(to see make output on scree do "make VERBOSE=1") 
+
+Run the server: 
+
+$ ./greeter_server
+Server listening on 0.0.0.0:50051
+
+$./greeter_client 
+Greeter received: Hello world 
+
+
+I have attached a sample client and server app to send and receive sensor data. 
+------------------------------------------------------------------------------
+How to run? 
+----------
+* $make all 
+
+* Open a window and run server app 
+
+$ ./sensor_server 
+Server listening on port: 0.0.0.0:5000
+ 
+
+* In another window run client app 
+
+$ ./sensor_client 
+response recieved from server
+20
+25
+1
+
+* Server-side o/p for above client query 
+
+$ ./sensor_server 
+Server listening on port: 0.0.0.0:5000
+data recieved from client
+name :Laboratory
+temperature :43
+humidity :35
+door :0
+
+ 
+
+ 

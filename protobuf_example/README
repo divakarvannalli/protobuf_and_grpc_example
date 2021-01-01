@@ -1,0 +1,67 @@
+PROTOBUF 
+---------------------------
+What are protocol buffers? 
+---------------------------
+Protocol buffers are Google's language-neutral, platform-neutral, extensible mechanism for serializing structured data – think XML, but smaller, faster, and simpler.  
+
+You define how you want your data to be structured once, then you can use special generated source code to easily write and read your structured data to and from a variety of data streams and using a variety of languages. 
+
+protoc  
+-------
+ protobuf compiler takes a. proto file as an input and generates the code (. pb files) in specified language.this code will have getter and setter function by which user can create a serialized structured data which can be used to communicate between processes. 
+
+assume there is a proto file named example.proto , we can generate cpp classes for these proto files using below command 
+
+protoc --cpp_out=. example.proto 
+
+--proto_path = to specify directory of proto file 
+
+--cpp_out = directory where to generate cpp classes 
+
+--python_out = directory where to generate python classes 
+ 
+
+How to install protoc compiler? 
+------------------------------
+(copied from https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04) 
+
+Prerequisites 
+
+$sudo apt-get install autoconf automake libtool curl make g++ unzip 
+
+Installation 
+
+    From this page, download the protobuf-all-[VERSION].tar.gz. 
+
+    Extract the contents and change in the directory 
+
+    ./configure 
+
+    make 
+
+    make check 
+
+    sudo make install 
+
+    sudo ldconfig # refresh shared library cache. 
+
+Check if it works 
+
+$ protoc --version 
+
+libprotoc 3.6.1 
+
+
+example code to show How to serialize proto message using cpp and extract it by python. 
+----------------------------------------------------------------------------------------
+(for more details refer: https://blog.conan.io/2019/03/06/Serializing-your-data-with-Protobuf.html) 
+
+download attachment "protobuf_example.zip" 
+
+make clean  
+
+make all 
+
+./create_message.out (this creates a serialized proto message in "sensor.data" file) 
+
+python3 extract_msg.py (this extracts the message from "sensor.data" and prints to stdout) 

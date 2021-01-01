@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package sensor_data;
+
+// Defines the service
+service sensor_service {
+    // Function invoked to send the request
+    rpc switch_request (Sensor) returns (response) {}
+}
+
+enum SwitchLevel {
+    CLOSED = 0;
+    OPEN = 1;
+}
+
+message Sensor {
+  string name = 1;
+  double temperature = 2;
+  int32 humidity = 3;
+  SwitchLevel door = 4;
+}
+
+message response {
+  double switch_temp_to = 1;
+  int32 switch_humid_to = 2;
+  SwitchLevel switch_door_to = 3;
+}
